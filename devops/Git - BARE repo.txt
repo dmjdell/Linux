@@ -1,0 +1,52 @@
+natasha@ststor01   172.16.238.15 Bl@kW
+
+TO INSTALL GIT
+ sudo yum -y install git-all 
+
+
+ git config --global user.name "user" && git config --global user.email user@example.com
+
+ git init --bare /opt/blog.git
+
+ git remote -v 
+
+COPY UPDATE FILE 
+
+cp  /tmp/update /opt/blog.git/hooks/
+
+cp /tmp/update /opt/blog.git/hooks/update.sample
+
+
+cd /usr/src/kodekloudrepos/ 	
+
+git clone /opt/blog.git blog 
+
+cd blog 
+
+touch newfile
+
+	
+
+git commit -m "First file "
+
+
+to create xfusioncorp_blog branch these will be the steps
+
+
+- cp /tmp/readme.md  .
+- git branch xfusioncorp_blog 
+- git commit -m " added readme file "
+- git branch -a
+- git checkout xfusioncorp_blog
+- git push master xfusioncorp_blog 
+
+
+
+
+
+
+
+
+
+
+

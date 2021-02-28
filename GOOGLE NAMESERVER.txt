@@ -1,0 +1,11 @@
+
+
+I commented existing nameserver in /etc/resolv.conf and added the below,
+
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+
+TESTING 
+
+curl -L https://google.com

@@ -1,0 +1,90 @@
+
+
+
+ sudo visudo
+ 
+ sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01
+ 
+ 
+ tony ALL=(ALL) NOPASSWD: ALL
+ 
+ sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02 
+ steve ALL=(ALL) NOPASSWD: ALL
+ 
+ sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03
+ banner ALL=(ALL) NOPASSWD: ALL
+ 
+ sshpass -p "Sarah_pass123"  ssh -t -o StrictHostKeyChecking=no sarah@ststor01 
+ sarah ALL=(ALL) NOPASSWD: ALL
+ 
+ 
+LOGIN TO GIT AND JENKINS 
+
+
+
+INSTALL PLUGIN GIT 
+
+
+http://git.stratos.xfusioncorp.com/sarah/web.git
+
+
+CREATE JOB JENKINS ==>  nautilus-app-deployment 
+
+
+SCM ==> GIT ADD ==> http://git.stratos.xfusioncorp.com/sarah/web.git
+
+CHOOSE POLL SCM AND ADD BELOW VALUE 
+
+ "* * * * *"
+
+
+sshpass -p "Sarah_pass123"   scp -r /var/jenkins_home/workspace/nautilus-app-deployment/ sarah@ststor01:/data
+
+
+EXECUTE SHELL SCRIPT 
+
+#!/bin/bash
+sshpass -p "Sarah_pass123"  ssh -t -o StrictHostKeyChecking=no sarah@ststor01 '
+exit
+sshpass -p "Sarah_pass123"   scp -r /var/jenkins_home/workspace/nautilus-app-deployment/* sarah@ststor01:/data/
+
+CREATE JOB JENKINS ==>   manage-services
+
+UNDER BUILD TRIGGER 
+
+Click on "Build after other projects are built"
+Projects  TO ADD "nautilus-app-deployment"
+
+
+EXECUTE SHELL SCRIPT 
+
+#!/bin/bash
+echo "####################################################APPSERVER1####################################################";
+sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01 '
+echo "Restart httpd service on APP01"
+echo "Ir0nM@n"  |sudo -S systemctl restart httpd ;' ;
+echo "####################################################APPSERVER2####################################################";
+sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02 '
+echo "Restart httpd service on APP02"
+echo "Am3ric@"  |sudo -S  systemctl restart httpd ;' ;
+echo "####################################################APPSERVER3####################################################";
+sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03 '
+echo "Restart httpd service on APP03"
+echo "BigGr33n"  |sudo -S systemctl restart httpd;' 
+exit 0;
+
+
+LOGIN to 
+
+
+sarah@ststor01  
+
+
+git pull origin master 
+
+Change index.html to Welcome to the xFusionCorp Industries
+
+
+git add index.html
+git commit -m "Change index.html message "
+git push origin master 

@@ -1,0 +1,40 @@
+cd /home/thor/ansible
+
+
+cat inventory 
+
+
+stapp01 ansible_host=172.16.238.10 ansible_ssh_pass=Ir0nM@n ansible_user=tony
+stapp02 ansible_host=172.16.238.11 ansible_ssh_pass=Am3ric@ ansible_user=steve
+stapp03 ansible_host=172.16.238.12 ansible_ssh_pass=BigGr33n ansible_user=banner
+
+/usr/src/dba/datacenter.zip 
+tar -xvjf /usr/src/dba/datacenter.zip  .
+
+Unzip /usr/src/dba/datacenter.zip archive in /opt/dba/ location on all app servers.
+
+Make sure the unzipped data must has the respective sudo user as 
+their user and group owner, i.e tony for app server 1, steve for app server 2, 
+banner for app server 3.
+
+The extracted data permissions must be 0644
+
+vi playbook.yml
+
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+  - name: Unarchive a file that is already on the remote machine
+    unarchive:
+         src: /usr/src/data/datacenter.zip 
+         dest: /opt/data/
+         owner: "{{hostvars[inventory_hostname].ansible_user}}"
+         group: "{{hostvars[inventory_hostname].ansible_user}}"
+         mode: '0644'
+
+ansible-playbook -i inventory playbook.yml
+
+
+
+	

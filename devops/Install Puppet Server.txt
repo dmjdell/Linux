@@ -1,0 +1,23 @@
+
+yum -y update
+yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+
+ yum -y install puppetserver
+ 
+ 
+yum install puppetserver -y 
+yum remove puppetserver -y 
+
+
+/etc/sysconfig/puppetserver
+
+
+ JAVA_ARGS="-Xms2g -Xmx2g"
+
+CHANGE TO 
+JAVA_ARGS="-Xms512m -Xmx512m".
+
+
+systemctl enable puppetserver
+service puppetserver start 
+service puppetserver status 

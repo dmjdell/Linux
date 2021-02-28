@@ -1,0 +1,42 @@
+TO install nginx 
+
+- sudo yum install epel-release
+- yum install nginx
+- systemctl start nginx
+- systemctl status nginx
+- sudo systemctl enable nginx
+
+If you have a firewalld firewall running, you can open these ports by typing
+ 
+Copy the crt 
+
+- mv /tmp/nautilus.crt  /etc/ssl/certs/nautilus.crt 
+- mv /tmp/nautilus.key  /etc/ssl/certs/nautilus.key 
+ 
+ 
+ /etc/nginx/conf.d/ssl.conf
+ 
+ server {
+    listen 172.16.238.11:443  ssl;
+    listen 172.16.238.11:80  ssl;
+    server_name appserver2;
+
+    ssl_certificate /etc/ssl/certs/nautilus.crt ;
+    ssl_certificate_key /etc/ssl/certs/nautilus.key;
+	
+	location / {
+                root   tmirror, ovl;
+                index  index.html index.htm;
+        }
+    
+}
+
+/usr/share/nignx/html
+
+curl -I -k -H "Accept: application/text" https://172.16.238.11/index.html
+
+
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE></TITLE></HEAD><BODY>
+<H1>Welcome!</H1>
+</BODY></HTML>

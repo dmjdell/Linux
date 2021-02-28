@@ -1,0 +1,78 @@
+
+
+
+Add a slave node named Storage Server. It should be labeled as ststor01 and its remote root directory should be /home/natasha.
+
+
+https://2886795298-8081-kitek06o.environments.katacoda.com/computer/new
+
+Storage Server
+
+/computer/createItem
+
+ststor01
+
+/pluginManager/available
+SSH Build Agent Plugin
+sudo yum -y install java-1.8.0-openjdk
+
+
+choose  ==> launch ssh via ssh
+natasha@ststor01   172.16.238.15			Bl@kW	Stork DC Storage Filer
+Non verifying Verification Strategy
+ /home/natasha
+
+sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01
+sudo visudo 
+
+then add ==>  natasha ALL=(ALL) NOPASSWD: ALL
+
+
+We have already cloned repository on Storage Server under /home/sarah/web_app. Update the content of the file index.html 
+under the same repository to Welcome to Nautilus Group! and push the changes to the origin into master branch.
+
+Publish Over SSH
+
+
+Create web hook
+
+cd /home/sarah/web_app/
+
+		git pull origin master 
+
+		Change index.html to Welcome to Nautilus Group!
+
+
+		git add index.html
+		git commit -m "Change index.html message "
+		git push origin master 
+
+
+Apache is already installed on all app Servers its running on port 8088.
+
+Create a Jenkins pipeline job named  datacenter-webapp-job (it must not be a Multibranch pipeline) and configure it to:
+a. Deploy the code from web_app repository under /data on Storage Server, as this location is already mounted to the document 
+root /var/www/html of app servers. The pipeline should have a single stage named Deploy ( which is case sensitive ) to accomplish the deployment.
+
+Pipeline 
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Deploy') {
+            steps {
+                sh 'rm -rf web_app'
+				   sh 'git clone http://git.stratos.xfusioncorp.com/sarah/web_app.git'
+				sh '''
+					sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01 '
+					exit'
+			       '''
+              sh '		sshpass -p "Bl@kW"   scp -r /var/jenkins_home/workspace/nautilus-webapp-job/web_app/ natasha@ststor01:/data/'
+            }
+        }
+
+    }
+}
+
+

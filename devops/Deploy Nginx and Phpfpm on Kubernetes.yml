@@ -1,0 +1,64 @@
+Deploy Nginx and Phpfpm on Kubernetes
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    user nginx;
+    worker_processes  1;
+    events {
+      worker_connections  10240;
+    }
+    http {
+      server {
+          listen       8091;
+          server_name  localhost;
+          location / {
+            root   /var/www/html; #Change this line
+          index index.html index.htm index.php;
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-phpfpm
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      volumeMounts:
+        - mountPath:  /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          name: nginx-config-volume
+        - mountPath: /var/www/html
+          name: shared-files
+    - name: php-fpm-container
+      image: php:7.2-fpm	
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: shared-files
+  restartPolicy: Never
+  volumes:
+  - name: nginx-config-volume
+    configMap:
+        name: nginx-config
+  - name: shared-files
+    emptyDir: {}
+    
+    
+kubectl exec -it nginx-phpfpm -c nginx-container bash
+
+
+apt update
+apt install nano
+
+
+cd /var/www/html 
+
+
+

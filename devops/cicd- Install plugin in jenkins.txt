@@ -1,0 +1,7 @@
+Login to 8081
+
+username theadmin and Adm!n321
+
+Once logged in install Git and GitLab plugins. 
+You might need to restart Jenkins service to install these plugins so we recommend clicking
+ on Restart Jenkins when installation is complete and no jobs are running on plugin installation/update page i.e update centre.

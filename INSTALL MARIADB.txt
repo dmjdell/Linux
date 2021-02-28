@@ -1,0 +1,58 @@
+peter@stdb01    172.16.239.10			Sp!dy	Nautilus DB Server
+natasha@ststor01   172.16.238.15			Bl@kW	Stork DC Storage Filer
+
+tony@stapp01 172.16.238.10	
+
+
+sudo yum install -y openssh-clients openssh
+
+scp -r /home/thor/db.sql natasha@ststor01:/tmp/
+
+scp -r /home/thor/db.sql peter@stdb01:/tmp/
+
+
+INSTALL MRIADB 
+
+sudo yum install mariadb-server
+
+sudo systemctl start mariadb.service
+
+
+ACCESSING MRIADB 
+
+sudo mysql -u root
+
+
+
+COMMANDS TO CREAT TABLES IN 
+
+CREATE DATABASE kodekloud_db4;
+
+SHOW DATABASES;
+
+
+
+CREATE USER 'kodekloud_pop'@'%' IDENTIFIED BY 'kodekloud_pop';
+CREATE USER 'kodekloud_pop'@'stdb01' IDENTIFIED BY 'kodekloud_pop';
+
+DROP USER 'kodekloud_pop'@'%';
+DROP USER 'kodekloud_pop'@'stdb01';
+
+
+GRANT ALL PRIVILEGES ON kodekloud_db4.* to 'kodekloud_pop'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON kodekloud_db4.* to 'kodekloud_pop'@'stdb01' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'kodekloud_pop'@'%';
+
+
+mysql -u kodekloud_pop   -p kodekloud_db4  -h stdb01 < /tmp/db.sql
+
+use kodekloud_db4;
+show tables;
+
+SELECT User, Host, Password FROM mysql.user;
+
+
+yum install net-tools 
+netstat -tln

@@ -1,0 +1,58 @@
+cd /home/thor/ansible
+
+- hosts: stapp01
+  become: yes
+  become_user: root
+  tasks:
+    - name: Creating an empty file
+      file:
+        path: "/opt/sysops/blog.txt"
+        state: touch
+    - name: Changing file permission
+      file:
+        path: /opt/sysops/blog.txt
+        owner: "{{hostvars[inventory_hostname].ansible_user}}"
+        group: "{{hostvars[inventory_hostname].ansible_user}}"
+    - name: Creatomg symblink ring
+      file:
+        src: /opt/sysops
+        dest: /var/www/html
+        state: link
+		
+- hosts: stapp02
+  become: yes
+  become_user: root
+  tasks:
+    - name: Creating an empty file
+      file:
+        path: "/opt/sysops/story.txt"
+        state: touch
+    - name: Changing file permission
+      file:
+        path: /opt/sysops/story.txt
+        owner: "{{hostvars[inventory_hostname].ansible_user}}"
+        group: "{{hostvars[inventory_hostname].ansible_user}}"
+    - name: Creatomg symblink ring
+      file:
+        src: /opt/sysops
+        dest: /var/www/html
+        state: link
+		
+- hosts: stapp03
+  become: yes
+  become_user: root
+  tasks:
+    - name: Creating an empty file
+      file:
+        path: "/opt/sysops/media.txt"
+        state: touch
+    - name: Changing file permission
+      file:
+        path: /opt/sysops/media.txt
+        owner: "{{hostvars[inventory_hostname].ansible_user}}"
+        group: "{{hostvars[inventory_hostname].ansible_user}}"
+    - name: Creatomg symblink ring
+      file:
+        src: /opt/sysops
+        dest: /var/www/html
+        state: link

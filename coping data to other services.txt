@@ -1,0 +1,15 @@
+ natasha@ststor01  Bl@kW
+ 
+ 
+ tony@stapp01 172.16.238.10			Ir0nM@n	
+ mount | grep nfs
+ 
+ 
+ 
+ ON CLIENT
+ 
+ mount -t nfs 172.16.238.15:/appdata  /var/www/html
+ 
+/appdata 172.16.238.10(rw,sync,no_subtree_check,no_root_squash,fsid=0)
+/appdata 172.16.238.11(rw,sync,no_subtree_check,no_root_squash,fsid=0)
+/appdata 172.16.238.12(rw,sync,no_subtree_check,no_root_squash,fsid=0)

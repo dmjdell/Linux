@@ -1,0 +1,42 @@
+multibranch 
+
+pipeline 
+
+G itea
+
+
+sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01
+sudo visudo 
+
+then add ==>  natasha ALL=(ALL) NOPASSWD: ALL
+app-job
+
+properties([parameters([choice(choices: ['version1', 'version2', 'version3'], description: '', name: 'Branch')])])
+
+node{
+	 workSpaceDir = "/var/jenkins_home/${params.Branch}"
+	// sh "rm -rf $workSpaceDir"+"/*"
+    stage('SCM CHECKOUT')
+    {
+	 echo "Pulling changes from the branch ${params.Branch} "
+	 dir(workSpaceDir) {
+      sh "pwd"
+      sh "ls -ltr"
+      	  sh "rm -rf .git"
+   sh "rm -rf * &&  git clone  -b ${params.Branch} http://git.stratos.xfusioncorp.com/sarah/web_app.git ."
+    }
+	 
+    }
+     
+            stage('Deploy') {
+          
+				sh '''
+					sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01 '
+					exit'
+			       '''
+			       finalpath = 'sshpass -p "Bl@kW"   scp -r '+ "$workSpaceDir"+'/* natasha@ststor01:/data/'
+			       echo finalpath
+              sh finalpath
+            
+        }
+}

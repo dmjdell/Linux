@@ -1,0 +1,85 @@
+FIRELWALLD
+
+
+Installing 
+
+ 
+
+vi /etc/httpd/conf/httpd.conf
+
+yum install -y firewalld
+
+
+systemctl enable firewalld
+systemctl restart firewalld
+systemctl status firewalld
+
+
+sudo systemctl restart dbus
+
+TO SEE ALL THE ZONES 
+
+
+firewall-cmd --list-all-zones
+
+firewall-cmd --get-default-zone
+
+
+TO SEE ALL THE SERVICE AND PORTS ON THE SYSTEM
+
+ firewall-cmd --list-services
+ 
+ 
+ 
+firewall-cmd --zone=public --add-service=http
+systemctl restart firewalld
+
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --reload
+firewall-cmd --list-all
+
+1. Allow connection on nginx 
+8093
+firewall-cmd --permanent --zone=public --add-port=8092/tcp
+
+2.
+
+firewall-cmd --permanent --zone=public --add-source=172.16.238.14  --add-port=5003/tcp accept
+firewall-cmd --permanent --zone=public --add-rich-rule='rule family=ipv4 source address=172.16.238.14 port port=8082 protocol=tcp accept'
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --add-service=http
+
+curl -Ik http://172.16.238.11:8096
+curl -Ik http://172.16.238.11:8086
+
+curl -Ik http://172.16.238.12:8092
+curl -Ik http://172.16.238.12:8082
+
+curl -Ik http://172.16.238.10:8092
+curl -Ik http://stapp01:8082
+
+
+3. must be permanent rules
+
+4. zone should be public 
+
+5. start both apache and nginx 
+
+
+remove everthing 
+
+firewall-cmd --runtime-to-permanent
+
+curl -Ik http://stapp01:8093
+curl -Ik http://stapp01:5003
+
+
+
+ssh tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+ssh steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+ssh banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+
+
+loki@stlb01    172.16.238.14		loki	Mischi3f	Nautilus HTTP LBR

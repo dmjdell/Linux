@@ -1,0 +1,69 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+loki@stlb01    172.16.238.14		loki	Mischi3f	Nautilus HTTP LBR
+peter@stdb01    172.16.239.10			Sp!dy	Nautilus DB Server
+natasha@ststor01   172.16.238.15			Bl@kW	Stork DC Storage Filer
+clint@stbkp01  172.16.238.16		H@wk3y3	Nautilus Backup Server
+groot@stmail01         172.16.238.17			Gr00T123	Nautilus Mail Server
+
+
+Just accept this review by clicking tick mark then u will be able to try
+
+yum install tmux
+
+sudo yum install cronie
+sudo systemctl start crond
+crontab -l
+
+jump_host	Dynamic	jump_host.stratos.xfusioncorp.com	thor	mjolnir123	Jump Server to Access Stork DC
+
+
+showmount -e 172.16.238.15
+
+sudo apt-get install nfs-kernel-server
+
+/web /srv/nfs4/web  none   bind   0   0
+
+sudo mount -t nfs -o vers=4 172.16.238.15:/web /var/www/html
+
+useradd jarod
+groupadd nautilus_admin_users
+usermod -G nautilus_admin_users jarod
+
+https://www.tradingview.com/
+dennisjohn@live.com
+wFmEdWCKWid88L5
+
+
+AVQPJ5261K
+
+
+dennis.john@warwick.ac.uk
+Denwin3wincan!
+
+https://masters.wqu.org/index.php?
+Dennisjohn#2021
+
+https://www.zaproxy.org/docs/docker/baseline-scan/
+
+
+make sure to check that apache service is running in all app servers
+
+
+this is a known issue .Please raise this in community forum and tag kodekloud people to get more information 
+
+You have to make sure the apache service is running in all the APP SERVERS
+
+
+
+try again by clicking the tick mark near to the reply 
+
+
+U have confits with the contents (Like the current update and the code on master is different so git will merge the code together
+ and its up to you to resolve the confit ) .So what u have to do is remove all the contents from ====== to >>>>>>>> random numbers .
+ Then remove the <<<<<<<< HEAD LINE ALSO. The final content of  story-index.txt should only contain the lines from 1 to 4 .
+ Then commit and push to master.
+ Login to Gitea  and check is    story-index.txt contains only 4 lines. Then  the task is done. Try again

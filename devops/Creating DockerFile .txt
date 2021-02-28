@@ -1,0 +1,22 @@
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install apt-utils -y
+RUN apt-get install sed -y
+RUN apt-get install apt-transport-https -y
+RUN  apt-get install tzdata -y
+RUN apt-get install apache2 -y
+RUN apt-get install apache2-utils -y
+RUN sed -i "s/80/8082/g" /etc/apache2/ports.conf
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
+EXPOSE 8082
+
+
+sed 's/80/8082/g'
+
+
+
+docker exec -it CONTAINER_ID /bin/bash
+
+
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1

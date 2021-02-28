@@ -1,0 +1,38 @@
+NGINX HAS A REVERSE PROXY 
+
+clint@stbkp01  172.16.238.16		H@wk3y3	
+
+
+1.  Install apache
+yum install httpd 
+
+2. Install nginx
+
+
+ sudo yum install epel-release
+yum install nginx 
+
+3. Edit apache conf with port
+
+ 
+  vi /etc/httpd/conf/httpd.conf
+
+
+4. Edit /etc/nginx/nginx.conf
+
+ proxy_pass http://127.0.0.1:5003;
+ 
+5. move the index from source to dest
+
+ scp -r /home/index.html clint@stbkp01:/tmp
+
+ mc /tmp/index.html  /var/www/html/
+ 
+ 6. start service 
+
+  systemcl start apache 
+  systemctl start nginx
+ 
+ 7. test 
+ 
+ curl http://172.16.238.16:8091

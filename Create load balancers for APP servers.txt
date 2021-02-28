@@ -1,0 +1,20 @@
+
+
+yum -y update
+
+
+yum -y install haproxy
+
+
+cd /etc/haproxy/
+
+mv haproxy.cfg haproxy.cfg.orig
+
+vi haproxy.cfg
+
+
+
+add all the ip address below backend server   // make sure all apache service are running in respective servers
+
+
+curl http://stbl01:80

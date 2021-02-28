@@ -1,0 +1,9 @@
+natasha@ststor01   172.16.238.15 Bl@kW
+
+
+
+TO INSTALL GIT
+ sudo yum -y install git-all 
+ 
+  git config --global user.name "user" && git config --global user.email user@example.com
+  git init   /opt/official.git

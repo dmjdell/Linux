@@ -1,0 +1,3 @@
+kubectl run  dev-nginx-pod --image=nginx:latest
+
+kubectl run  dev-nginx-pod --image=nginx:latest

@@ -1,0 +1,8 @@
+natasha@ststor01   172.16.238.15			Bl@kW
+
+tar czf siva.tar.gz /data/siva
+
+
+cd /data/siva/
+
+tar xz siva.tar.gz

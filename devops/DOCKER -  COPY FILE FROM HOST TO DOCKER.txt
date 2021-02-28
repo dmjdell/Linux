@@ -1,0 +1,10 @@
+DOCKER COPY
+
+copy an encrypted file /tmp/nautilus.txt.gpg from docker host to ubuntu_latest container 
+(running on same server) in /home/ location.
+
+banner@stapp03  172.16.238.12		BigGr33n
+
+docker cp /tmp/nautilus.txt.gpg  ubuntu_latest:/home/ 
+
+ubuntu_latest

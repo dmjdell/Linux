@@ -1,0 +1,66 @@
+pvc:
+----
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jekyll-site-devops
+  namespace: jekyll-namespace-devops
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+pod and  svc:
+-----------
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: jekyll-pod-devops
+  name: jekyll-pod-devops
+  namespace: jekyll-namespace-devops
+spec:
+  volumes:
+  - name: site
+    persistentVolumeClaim:
+      claimName: jekyll-site-devops
+  initContainers:
+  - image: kodekloud/jekyll
+    name: jekyll-init-devops
+    command: [ "/bin/bash", "-c", "bundle update; jekyll new /site" ]
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - name: site
+      mountPath: /site
+  containers:
+  - image: kodekloud/jekyll-serve
+    name: jekyll-container-devops
+    volumeMounts:
+    - name: site
+      mountPath: /site
+
+---
+apiVersion: v1                                               
+kind: Service
+metadata:
+  labels:
+    app: jekyll
+  name:  jekyll-service-devops
+  namespace: jekyll-namespace-devops
+spec:
+  ports:
+    port: 8080
+    protocol: TCP
+    targetPort: 4000
+    nodePort: 31181
+  type: NodePort
+status:
+  loadBalancer: {}

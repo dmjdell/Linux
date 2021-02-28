@@ -1,0 +1,9 @@
+sudo iptables -A INPUT -p tcp --dport 8097 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 6400  -j DROP
+service iptables save
+service iptables restart
+iptables -L
+
+
+// flush all the rules in IPTABELS
+iptables -F

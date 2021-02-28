@@ -1,0 +1,6 @@
+
+
+sudo useradd --shell=/sbin/nologin john  --shell=/sbin/nologin
+
+
+sudo useradd --shell=/sbin/nologin javed  --shell=/sbin/nologin

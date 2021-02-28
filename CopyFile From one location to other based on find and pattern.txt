@@ -1,0 +1,3 @@
+	find /var/www/html/ecommerce -name '*.js' | cpio -pdm /ecommerce
+	
+	find /var/www/html/ecommerce -name '*.csv' -exec cp --parents \{\} /ecommerce \;

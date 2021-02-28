@@ -1,0 +1,4 @@
+sed -i 's/About/Submarine/g' /root/nautilus.xml
+
+sed -i 's/Text/Software/g' /root/nautilus.xml
+sed -i 's/Random/Software/g' /root/nautilus.xml

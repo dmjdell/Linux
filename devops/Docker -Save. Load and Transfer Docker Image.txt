@@ -1,0 +1,18 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+docker save ecommerce:devops | gzip > devops.tar.gz
+
+
+scp devops.tar.gz banner@stapp03:/tmp
+
+
+
+TO FIX DOCKER 
+
+sudo systemctl unmask docker
+sudo systemctl start docker
+
+
+docker load   --input devops.tar.gz

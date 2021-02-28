@@ -1,0 +1,14 @@
+
+ssh natasha@ststor01  			Bl@kW	
+
+cd  /usr/src/kodekloudrepos/blog
+
+
+git log 
+
+
+git revert  fbea55ae9d33c2c6406207f03923ce7fdef261db
+
+git commit -m "revert blog"
+
+when u do just revert it directly make changes to the master branch , when u use -n it will not make a direct commit to master there by u can use commit with the message they have asked for

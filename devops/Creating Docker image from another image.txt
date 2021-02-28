@@ -1,0 +1,18 @@
+Create an image official:nautilus on Application Server 3 from a container ubuntu_latest that is running on same server.
+
+
+ 
+
+
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+
+
+
+docker tag ubuntu:latest official:nautilus
+
+
+
+Task Status - Failed
+- 'official:nautilus' image is not created from container 'ubuntu_latest' on Application 

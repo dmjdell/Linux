@@ -1,0 +1,21 @@
+
+	  
+	  
+kubectl get pod nginx-phpfpm -o yaml > /home/thor/nginx-phpfpm.yaml
+
+mjolnir123
+
+edit nginx-container mount /var/www/html
+
+kubectl delete pod nginx-phpfpm
+
+
+vi /home/thor/nginx-phpfpm.yaml
+
+kubectl create -f /home/thor/nginx-phpfpm.yaml
+
+kubectl cp /tmp/index.php nginx-phpfpm:/var/www/html -c nginx-container
+
+kubectl exec -it nginx-phpfpm -c nginx-container bash
+
+curl localhost:8099

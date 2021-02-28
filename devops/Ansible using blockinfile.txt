@@ -1,0 +1,44 @@
+
+
+jump_host	Dynamic	jump_host.stratos.xfusioncorp.com	thor	mjolnir123	Jump Server to Access Stork DC
+
+
+playbook.yaml 
+
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: installed
+    - name: Start service httpd
+      service:
+        name: httpd
+        state: started
+    - name: Ansible blockinfile insertafter and insertbefore
+      blockinfile:
+        create: true
+        dest: /var/www/html/index.html
+        block: |
+            Welcome to XfusionCorp!
+            This is Nautilus sample file, created using Ansible!
+            Please do not modify this file manually!
+    - name: Ansible blockinfile change value
+      file:
+       path: /var/www/html/index.html
+       owner: apache
+       group: apache
+       seuser: apache
+       mode: 0777
+	   
+	- name: Copy file with owner and permissions
+	  copy:
+		src: /home/thor/ansible/role/httpd/templates/index.html.j2
+		dest: /var/www/html/index.html
+		owner: "{{hostvars[inventory_hostname].ansible_user}}"
+		group: "{{hostvars[inventory_hostname].ansible_user}}"
+		mode: '0644'
+
+ansible-playbook -i inventory playbook.yml

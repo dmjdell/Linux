@@ -1,0 +1,9 @@
+sudo su 
+
+mjolnir123
+
+
+
+vi /etc/anisble/anisble.cfg
+
+#remote_user = root  // the value u need to change

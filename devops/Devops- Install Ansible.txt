@@ -1,0 +1,6 @@
+
+
+
+yum install python-pip python-devel python
+
+pip install ansible==2.5.7

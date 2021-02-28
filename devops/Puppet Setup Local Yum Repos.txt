@@ -1,0 +1,38 @@
+demo.pp
+
+cd /etc/puppetlabs/code/environments/production/manifests
+
+vi  demo.pp
+
+
+node default {
+   include local_yum_repo 
+
+      package { 'httpd':
+    ensure => 'installed',
+	require => Yumrepo[localyum],
+  }
+}
+
+class local_yum_repo  {
+   yumrepo { "localyum":
+      baseurl => "file:///packages/downloaded_rpms",
+      descr => "localyum repository",
+      enabled => 1,
+      gpgcheck => 0
+   }
+
+}
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+ puppet parser validate  demo.pp
+puppet agent -t 
+
+
+yum repolist
+yum list httpd 
+
+

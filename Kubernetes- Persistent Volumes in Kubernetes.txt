@@ -1,0 +1,47 @@
+Dennisjohn#2021
+
+PersistentVolume 
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-datacenter
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce 
+  hostPath:
+    path: "/mnt/security"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-datacenter
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-datacenter
+spec:
+  volumes:
+    - name: storage-datacenter
+      persistentVolumeClaim:
+        claimName: pvc-datacenter
+  containers:
+    - name:  container-datacenter
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: storage-datacenter

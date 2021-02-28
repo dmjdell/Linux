@@ -1,0 +1,30 @@
+
+CHECK FOR PROCESS
+
+ netstat -ltnp | grep -w ':8082'
+ 
+ kill -9 pid 
+ 
+
+ telnet 172.16.238.10	 8082
+ 
+ssh tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+ssh steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+ssh banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+IPTABLES RULES 
+
+
+iptables -S
+iptables -S INPUT
+iptables -S OUTPUT
+ 
+sudo iptables -A INPUT -p tcp --dport 3003 -j ACCEPT
+
+iptables -L --line-numbers
+iptables -D INPUT 
+
+
+service iptables save
+

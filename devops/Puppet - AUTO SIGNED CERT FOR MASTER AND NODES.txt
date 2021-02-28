@@ -1,0 +1,72 @@
+The Puppet server package is already installed on puppet master
+ i.e jump server and the Puppet agent package is already installed on all App Servers.
+
+ However, you may need to begin required services on all these servers.
+
+Configure autosign configuration on the Puppet master i.e jump server (
+by creating autosign.conf in puppet configuration directory) and assign certificates for both master node as well as for all agent nodes.
+ Use host's FDQN to assign the certificates.
+
+Use alias puppet (dns_alt_names) for master node and add its entry in /etc/hosts config file on master i.e Jump Server as well as on all agent nodes i.e App Servers.
+
+
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+ find the config directory (as root)
+$ puppet config print --section master confdir
+
+
+cd /etc/puppetlabs/puppet
+
+# add a wildcard autosign
+$ cat /etc/puppet/autosign.conf
+jump_host.stratos.xfusioncorp.com
+stapp01.stratos.xfusioncorp.com
+stapp02.stratos.xfusioncorp.com
+stapp03.stratos.xfusioncorp.com
+
+
+systemctl restart puppet
+
+
+On master add puppet 
+vi /etc/hosts 
+
+
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.16.238.10   stapp01.stratos.xfusioncorp.com
+172.16.238.11   stapp02.stratos.xfusioncorp.com
+172.16.238.12   stapp03.stratos.xfusioncorp.com
+172.16.239.2    jump_host.stratos.xfusioncorp.com puppet
+172.16.238.3    jump_host.stratos.xfusioncorp.com puppet
+
+
+on apps  add puppet 
+
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.16.238.3    jump_host.stratos.xfusioncorp.com puppet
+172.16.239.4    stapp01.stratos.xfusioncorp.com stapp01
+172.16.238.10   stapp01.stratos.xfusioncorp.com stapp01
+
+
+puppet agent -t 
+
+
+To check 
+
+cd /etc/puppetlabs/puppet/ssl/ca/signed 
+
+ls 

@@ -1,0 +1,32 @@
+Add all app servers as slave nodes in Jenkins. Slave node name for app server 1, app server 2
+ and app server 3 must be App_server_1, App_server_2, App_server_3 respectively.
+
+Add labels as below
+
+App_server_1 : stapp01
+
+App_server_2 : stapp02
+
+App_server_3 : stapp03
+
+Remote root directory for App_server_1 must be /home/tony/jenkins, 
+for App_server_2 must be /home/steve/jenkins and for App_server_3 must be /home/banner/jenkins.
+
+
+
+sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01
+sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02 
+sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03
+ 
+ 
+
+
+sudo yum install java-1.8.0-openjdk
+
+
+SSH Build Agent Plugin
+
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3

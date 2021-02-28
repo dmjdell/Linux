@@ -1,0 +1,18 @@
+Create a Jenkins job which should be named devops-pipeline-job.
+
+Configure this job to run a simple bash command to echo hello world!!.
+
+Create a view named devops-crons (should be a List View) and make sure devops-pipeline-job and devops-cron-job (which is already present on Jenkins) jobs are listed under this new view.
+
+Schedule this newly create job to build periodically at every minute i.e '* * * * *' (please make sure to use the cron expression exactly same how it is mentioned here)
+
+Make sure the job builds successfully.
+
+
+#!/bin/bash
+echo "echo hello world!!"
+
+
+
+
+* * * * *

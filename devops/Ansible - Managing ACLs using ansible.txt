@@ -1,0 +1,59 @@
+vi playbook.ymlmanaging acls using ansible
+
+
+cat inventory 
+
+stapp01 ansible_host=172.16.238.10 ansible_ssh_pass=Ir0nM@n ansible_user=tony
+stapp02 ansible_host=172.16.238.11 ansible_ssh_pass=Am3ric@ ansible_user=steve
+stapp03 ansible_host=172.16.238.12 ansible_ssh_pass=BigGr33n ansible_user=banner
+
+
+- hosts: stapp01
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Creating file
+    file:
+      path: "/opt/finance/blog.txt"
+      state: touch
+  - name: setting permissions on directory and user
+    acl:
+      path: /opt/finance/blog.txt
+      entity: tony
+      etype: group
+      permissions: r
+      state: present
+- hosts: stapp02
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Creating file
+    file:
+      path: "/opt/finance/story.txt"
+      state: touch
+  - name: setting permissions on directory and user
+    acl:
+      path: /opt/finance/story.txt
+      entity: steve
+      etype: user
+      permissions: rw
+      state: present
+- hosts: stapp03
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Creating file
+    file:
+      path: "/opt/finance/media.txt"
+      state: touch
+  - name: setting permissions on directory and user
+    acl:
+      path: /opt/finance/media.txt
+      entity: banner
+      etype: group
+      permissions: rw
+      state: present
+	  
+
+
+ansible-playbook -i inventory playbook.yml 

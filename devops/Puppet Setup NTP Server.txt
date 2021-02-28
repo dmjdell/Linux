@@ -1,0 +1,29 @@
+vi /etc/puppetlabs/code/environments/production/manifests/official.pp 
+
+/opt/puppetlabs/bin/puppet module install puppetlabs-ntp -i /etc/puppetlabs/code/modules/
+
+node "stapp01.stratos.xfusioncorp.com","stapp02.stratos.xfusioncorp.com","stapp03.stratos.xfusioncorp.com" {
+        include ntpconfig
+        include ntp
+}
+class ntpconfig  {
+class { 'ntp':
+  servers => [ 'server 2.oceania.pool.ntp.org'],
+  service_manage => false,
+}
+}
+
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+puppet parser validate  /etc/puppetlabs/code/environments/production/manifests/official.pp
+
+puppet agent -tv
+
+
+TO CHECK THE SERVICE 
+
+
+puppet resource service ntpd

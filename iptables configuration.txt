@@ -1,0 +1,44 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+loki@stlb01    172.16.238.14			 Mischi3f
+
+
+yum install iptables-services
+systemctl start iptables
+systemctl enable iptables
+systemctl status iptables
+
+iptables -nvL
+
+iptables --flush
+
+iptables -I INPUT \! --src 172.16.238.14 -m tcp -p tcp --dport 5000 -j DROP
+
+
+OR BELOW ONE 
+ 
+iptables -A INPUT -s 172.16.238.14 -p tcp --dport 6200   -j ACCEPT
+iptables -A OUTPUT -p tcp --destination-port 6200 -j DROP
+
+iptables -D INPUT 5
+sudo iptables  -A INPUT -p tcp --destination-port 6200  -s 172.16.238.14 -j ACCEPT
+sudo iptables -A INPUT -p tcp --destination-port 6200 -j DROP
+
+SAVE IP TABLES 
+
+ service iptables save
+ sudo /sbin/iptables-save > /etc/sysconfig/iptables
+
+TOO SEE THE RULES FOR IPTABLES
+iptables -L --line-numbers
+ 
+ 
+ TO DELETE IPTABLE BASED ON RULE NUMBERS
+ 
+  iptables -D OUTPUT 1
+  iptables -D INPUT 5
+ 
+ curl -I http://stapp01:6200/index.html

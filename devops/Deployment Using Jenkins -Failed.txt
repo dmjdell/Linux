@@ -1,0 +1,106 @@
+
+
+ sudo visudo
+ 
+ sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01 ' sudo visudo'
+ 
+ 
+ tony ALL=(ALL) NOPASSWD: ALL
+ 
+ sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02  ' sudo visudo'
+ steve ALL=(ALL) NOPASSWD: ALL
+ 
+ sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03 ' sudo visudo'
+ banner ALL=(ALL) NOPASSWD: ALL
+  sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01   ' sudo visudo'
+ sarah ALL=(ALL) NOPASSWD: ALL
+ natasha ALL=(ALL) NOPASSWD: ALL
+
+  sudo su
+  chmod 777 /data 
+  
+  
+  * * * * *
+  
+  Transfers  source files ==> **/*
+             remote directory ==> /data
+  
+  
+CREATE JOB JENKINS ==>  nautilus-app-deployment 
+
+  
+ Gitea   Publish Over SSH
+
+SCM ==> GIT ADD ==> http://git.stratos.xfusioncorp.com/sarah/web.git
+
+
+http://[ your jenkins server ]/gitea-webhook/post
+
+
+https://2886795271-8081-kitek06m.environments.katacoda.com/gitea-webhook/post
+https://2886795289-8081-kitek06o.environments.katacoda.com/gitea-webhook/post
+ 
+
+
+#!/bin/bash
+echo "####################################################Copy data to STOR01####################################################";
+sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01 ' cd /tmp ;mkdir code'
+sshpass -p "Bl@kW"   scp -r /var/jenkins_home/workspace/nautilus-app-deployment/* natasha@ststor01:/tmp/code
+sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01 'echo "Bl@kW"  | sudo -S cp /tmp/code/. /data/'
+sshpass -p "Bl@kW"  ssh -t -o StrictHostKeyChecking=no natasha@ststor01 ' echo "Bl@kW"  | sudo -S rsync -a /tmp/code/ /data/ '
+
+
+
+echo "####################################################APPSERVER1####################################################";
+sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01 '
+echo "Ir0nM@n"  |sudo -S yum -y install epel-release yum-utils;
+sudo yum -y update httpd;
+sudo yum -y install httpd;
+sudo systemctl start httpd;
+echo "Changing port"
+sudo sed -i "s/80/6300/g" /etc/httpd/conf/httpd.conf;
+echo "restarting httpd"
+echo "Ir0nM@n"  |sudo -S systemctl restart httpd ' ;
+echo "####################################################APPSERVER2####################################################";
+sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02 '
+echo "Am3ric@"  |sudo -S yum -y install epel-release yum-utils;
+echo "Insatlling httpd :"
+sudo yum -y update httpd;
+sudo yum -y install httpd;
+sudo systemctl start httpd;
+echo "Changing port"
+sudo sed -i "s/80/6300/g" /etc/httpd/conf/httpd.conf;
+echo "restarting httpd"
+echo "Am3ric@"  |sudo -S  systemctl restart httpd ' ;
+ echo "####################################################APPSERVER3####################################################";
+sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03 '
+echo "BigGr33n"  |sudo -S yum -y install epel-release yum-utils;
+echo "Insatlling httpd :"
+sudo yum -y update httpd;
+sudo yum -y install httpd;
+sudo systemctl start httpd;
+echo "Changing port"
+sudo sed -i "s/80/6300/g" /etc/httpd/conf/httpd.conf;
+echo "restarting httpd;"
+echo "BigGr33n"  |sudo -S systemctl restart httpd'; 
+exit 0;
+
+
+#
+
+sshpass -p "Sarah_pass123"  ssh -t -o StrictHostKeyChecking=no sarah@ststor01 
+
+git pull origin master 
+
+Change index.html to Welcome to the xFusionCorp Industries
+
+
+git add index.html
+git commit -m "Change index.html message "
+git push origin master 
+
+
+
+make sure to change the port and php version
+then when the job completes ssh to app server and see if the port is correct and httpd is installed and running
+php -v 

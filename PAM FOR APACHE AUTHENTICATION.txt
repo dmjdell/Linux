@@ -1,0 +1,34 @@
+PAM AUTHENTICATION FOR APACHE 
+
+
+yum --enablerepo=epel -y install mod_authnz_external pwauth
+
+vi /etc/httpd/conf.d/authnz_external.conf
+
+
+
+<Directory /var/www/html/protected>
+    AuthType Basic
+    AuthName "PAM Authentication"
+    AuthBasicProvider external
+    AuthExternal pwauth
+    require valid-user
+</Directory>
+
+
+ systemctl restart httpd
+ 
+curl -u anita  http://stapp03:8080/protected/index.html
+
+Nautilus App 1 - 172.16.238.10	
+
+ssh tony@stapp01    Ir0nM@n  	
+
+
+Nautilus App 2   - 	172.16.238.11	
+	
+ssh steve@stapp02 		Am3ric@
+
+Nautilus App 3  -  172.16.238.12
+
+ssh banner@stapp03  		BigGr33n	

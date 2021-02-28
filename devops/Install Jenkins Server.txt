@@ -1,0 +1,30 @@
+INSTALLING JENKINS 
+
+1. 
+ 
+ ssh root@jenkins   S3curePass
+ 
+ 
+ wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+/etc/init.d/dbus start
+
+  sudo apt update
+  sudo apt install openjdk-8-jdk
+  apt install apt-transport-https
+  wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+  sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+  sudo apt update
+
+ sudo apt install jenkins
+ 
+ 
+ apt-get install --reinstall locales && sudo dpkg-reconfigure locales
+ locale-gen en_US.UTF-8
+ 
+  service  jenkins start
+service  jenkins status
+
+
+cat /var/lib/jenkins/secrets/initialAdminPassword

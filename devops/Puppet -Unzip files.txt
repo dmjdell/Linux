@@ -1,0 +1,41 @@
+
+cd /etc/puppetlabs/code/environments/production/manifests
+
+
+vi news.pp
+
+
+node "stapp01.stratos.xfusioncorp.com","stapp02.stratos.xfusioncorp.com","stapp03.stratos.xfusioncorp.com" {
+        include mymodule
+}
+
+class mymodule {
+
+archive { '/opt/news/news.zip':
+ensure => present,
+extract => true,
+extract_path => '/opt/news',
+source => '/usr/src/news/news.zip',
+cleanup => true,
+}
+}
+
+
+node "stapp01.stratos.xfusioncorp.com","stapp02.stratos.xfusioncorp.com","stapp03.stratos.xfusioncorp.com" {
+        include mymodule
+}
+
+class mymodule {
+
+archive { '/opt/news/news.zip':
+ensure => present,
+extract => true,
+extract_path => '/opt/news',
+source => /usr/src/news/news.zip',
+cleanup => true,
+}
+}
+
+On each agent as root execute below line 
+
+puppet agent -tv

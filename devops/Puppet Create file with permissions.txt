@@ -1,0 +1,20 @@
+
+
+node "stapp01.stratos.xfusioncorp.com" {
+   include file_edit
+}
+
+class file_edit
+{
+
+file { '/opt/finance/news.txt':
+  ensure => present,
+      content => 'Welcome to xFusionCorp Industries!',
+    mode   => '0644',
+
+}}
+
+
+
+puppet agent -t 
+

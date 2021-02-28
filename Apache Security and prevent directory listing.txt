@@ -1,0 +1,22 @@
+
+
+TO remove version of APACHE 
+sudo vi /etc/httpd/conf/httpd.conf 
+
+ADD BELOW COMMADS TO ABOVE FILE
+
+ServerTokens Prod
+ServerSignature Off 
+
+
+
+
+to remove dirc listing
+
+ vi /var/www/html/beta.htaccess  ==> Options -Indexes 
+
+
+<Directory /var/www/html>
+    Options -Indexes
+</Directory>
+

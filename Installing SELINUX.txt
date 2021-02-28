@@ -1,0 +1,49 @@
+Installing SELINUX IN MACHINE
+
+yum install selinux
+
+yum install policycoreutils policycoreutils-python selinux-policy selinux-policy-targeted libselinux-utils setroubleshoot-server setools setools-console mcstrans
+
+EDT THE FILE 
+vi /etc/selinux/config  
+
+CHANGE
+
+SELINUX=enforcing ==> SELINUX=disabled
+
+
+
+CREATING USER WITH UID AND HOME DIR
+
+sudo useradd -u 1882 -m -d /opt/mariyam  mariyam 
+
+
+PREVENT ROOT LOGIN THROUGH SSH
+
+sudo vi /etc/ssh/sshd_config
+sudo systemctl restart sshd 
+
+SELINUX
+
+install using ==> yum install policycoreutils policycoreutils-python selinux-policy selinux-policy-targeted libselinux-utils setroubleshoot-server setools setools-console mcstrans
+edit file ==> vi /etc/selinux/config
+look for the field SELINUX=enforcing and change it to SELINUX=disabled
+
+
+
+ Login to stapp01 
+ systemctl get-default 
+ systemctl set-default graphical.target
+ 
+	Linux String Substitute 
+
+ sudo sed -i 's/String/Sonar/g /root/nautilus.xml
+ 
+ 
+ try again always read the question, when u retry the question some time changes 
+
+In /etc/selinux/config file  look for the field SELINUX=enforcing and change it to SELINUX=disabled
+
+ 
+
+

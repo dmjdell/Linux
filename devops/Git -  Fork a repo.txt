@@ -1,0 +1,10 @@
+USER NAME jon
+
+Jon_pass123
+
+click on repo ==> https://2886795314-8000-kitek06h.environments.katacoda.com/sarah/story-blog
+
+fork the repo 
+
+
+There you will see a Git repository sarah/story-blog, fork it under jon user.

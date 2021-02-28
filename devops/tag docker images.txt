@@ -1,0 +1,14 @@
+
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+
+systemctl start docker
+
+
+docker pull busybox:musl
+
+docker image tag 8bce8d24824c busybox:media
+
+
+docker image tag image_id busybox:media

@@ -1,0 +1,27 @@
+
+
+INSTALL TOMCAT SERVER 
+
+sudo yum install tomcat
+
+
+
+sudo systemctl start tomcat
+sudo systemctl enable tomcat
+
+
+ /etc/tomcat/server.xml
+configure it to run 6200
+
+
+copy war to 
+
+/var/lib/tomcat/webapps
+
+
+
+
+scp -r /tmp/ROOT.war steve@stapp02:/tmp/
+
+
+steve@stapp02 172.16.238.11			Am3ric@

@@ -1,0 +1,18 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+
+sudo yum install dnf  dnf-plugins-core
+
+ dnf makecache
+ 
+dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+dnf -y install  docker-ce
+
+systemctl enable --now docker.service
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose

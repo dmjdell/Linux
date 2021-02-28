@@ -1,0 +1,11 @@
+max@ststor01    Max_pass123 172.16.238.15			Max_pass123@kW	Stork DC Storage Filer
+
+
+
+git pull
+
+vi story-index.txt
+
+git commit -m "resolved issues"
+
+git push origin 

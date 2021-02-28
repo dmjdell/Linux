@@ -1,0 +1,45 @@
+SFTP
+
+CREATE USER GORUP AND USER WITH NOLOGIN
+
+groupadd sftpusers
+useradd kareem
+passwd kareem         
+
+  //GyQkFRVNr3
+usermod -g sftpusers -s /bin/false kareem
+
+
+id kareem
+
+CHANGE THE BELOW VALUES
+
+# vi /etc/ssh/sshd_config
+Subsystem sftp /usr/libexec/openssh/sftp-server
+
+
+# vi /etc/ssh/sshd_config
+Subsystem sftp internal-sftp
+
+
+ADD THE CHROOT DIR
+
+# vi /etc/ssh/sshd_config
+Match Group sftpusers
+X11Forwarding no
+AllowTcpForwarding no
+ChrootDirectory /var/www/app
+ForceCommand internal-sftp
+PasswordAuthentication yes
+
+
+systemctl restart sshd
+
+TEST 
+
+ssh kareem@172.16.238.11
+sftp kareem@172.16.238.11
+
+
+
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2

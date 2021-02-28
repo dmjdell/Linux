@@ -1,0 +1,76 @@
+
+INSTALLING NFS 
+
+natasha@ststor01   172.16.238.15			Bl@kW
+
+sudo yum install -y openssh-clients openssh
+
+scp -r /tmp/index.html natasha@ststor01:/tmp/
+
+INSTALL SERVER NFS
+
+yum install nfs-utils
+
+mkdir /app 
+
+chmod -R 755 /app
+chown nfsnobody:nfsnobody /app
+
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl enable nfs-lock
+systemctl enable nfs-idmap
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start nfs-lock
+systemctl start nfs-idmap
+
+chkconfig rpcbind on
+chkconfig nfs-server on
+
+vi /etc/exports 
+
+add below deatils 
+
+/app    172.16.238.10(rw,sync,no_root_squash,no_all_squash)   
+/app    172.16.238.11(rw,sync,no_root_squash,no_all_squash)   
+/app    172.16.238.12(rw,sync,no_root_squash,no_all_squash)   
+
+
+systemctl restart nfs-server
+
+FIREWALL RULES FOR SERVER 
+
+firewall-cmd --permanent --zone=public --add-service=nfs
+firewall-cmd --permanent --zone=public --add-service=mountd
+firewall-cmd --permanent --zone=public --add-service=rpc-bind
+firewall-cmd --reload
+
+INSTALL NFS CLIENTS
+
+
+ssh tony@stapp01 172.16.238.10			Ir0nM@n	
+ssh steve@stapp02 172.16.238.11			Am3ric@	
+ssh banner@stapp03  172.16.238.12		BigGr33n	
+
+
+yum install nfs-utils
+
+
+mkdir -p /var/www/data
+chkconfig rpcbind on
+chkconfig nfs-server on
+
+
+mount -t nfs 172.16.238.15:/app /var/www/data
+
+df -kh
+
+touch /mnt/nfs/var/app/test_nfs
+
+
+PERMANENET MOUNTING 
+
+vi /etc/fstab
+
+172.16.238.15:/opt    /mnt/var/www/html  nfs defaults 0 0

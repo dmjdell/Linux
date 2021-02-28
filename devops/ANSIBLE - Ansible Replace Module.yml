@@ -1,0 +1,44 @@
+
+
+ /home/thor/ansible
+ 
+ 
+- hosts: stapp01
+  become: yes
+  become_user: root
+  tasks:
+   - name: Ansible replace string xFusionCorp
+     replace:
+       path: /opt/finance/blog.txt
+       regexp: 'xFusionCorp'
+       replace: 'Nautilus'
+- hosts: stapp02
+  become: yes
+  become_user: root
+  tasks:
+   - name: Ansible replace string Nautilus
+     replace:
+       path: /opt/finance/story.txt
+       regexp: 'Nautilus'
+       replace: 'KodeKloud'
+- hosts: stapp03
+  become: yes
+  become_user: root
+  tasks:
+   - name: Ansible replace string KodeKloud
+     replace:
+       path: /opt/finance/media.txt 
+       regexp: 'KodeKloud'
+       replace: 'xFusionCorp Industries'
+
+
+ansible-playbook -i inventory playbook.yml
+
+
+
+ sshpass -p "Ir0nM@n"  ssh -t -o StrictHostKeyChecking=no tony@stapp01 ' cat  /opt/finance/blog.txt'
+ 
+ sshpass -p "Am3ric@"  ssh -t -o StrictHostKeyChecking=no steve@stapp02  ' cat /opt/finance/story.txt '
+ sshpass -p "BigGr33n"  ssh -t -o StrictHostKeyChecking=no banner@stapp03 ' cat /opt/finance/media.txt '
+ 
+ 

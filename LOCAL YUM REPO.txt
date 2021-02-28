@@ -1,0 +1,34 @@
+mv /etc/yum.repos.d/*.repo /tmp/
+
+chmod -R o-w+r /packages/downloaded_rpms/
+
+
+
+CREATE NEW FILE 
+
+sudo vi /etc/yum.repos.d/remote.repo
+
+// ADD
+
+[local_yum] 
+
+name=local_yum  
+
+baseurl=file:///packages/downloaded_rpms/
+
+enabled=1
+
+gpgcheck=0
+
+
+TEST 
+yum install httpd
+
+
+clint@stbkp01  172.16.238.16		H@wk3y3	Nautilus Backup Server
+
+yum repolist all
+
+
+
+in the repo file value inside [] and name should be equal to yum_local

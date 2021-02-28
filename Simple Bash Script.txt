@@ -1,0 +1,36 @@
+#!/bin/bash
+zip -r   /backup/xfusioncorp_media.zip  /var/www/html/beta  
+&& scp -r /backup/xfusioncorp_media.zip clint@stbkp01:/backup/xfusioncorp_media.zip
+
+
+ssh-keygen -t rsa as user 
+
+then copy to target serer 
+
+
+ssh-copy-id clint@stbkp01
+
+
+
+
+
+
+sudo htpasswd -c /etc/httpd/.htpasswd rose  
+
+dCV3szSGNA
+
+htpasswd -n javed 
+
+scp -r /tmp/index.html tony@stapp01:/var/www/html/sysops 
+
+Ir0nM@n
+
+curl -I -u rose  http://172.16.238.10:8080/sysops
+
+curl -I -u javed  http://172.16.238.10:80/data 
+
+ /var/www/html/sysops/.htaccess
+ 
+
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+scp -r /tmp/nautilus.txt.gpg banner@stapp03:/home/data

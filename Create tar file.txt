@@ -1,0 +1,3 @@
+tar -cvzf mark.tar.gz /data/mark 
+
+mv mark.tar.gz /home

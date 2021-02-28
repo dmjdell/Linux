@@ -1,0 +1,12 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+ssh banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+adduser --system --no-create-home   ammar 
+adduser --system --no-create-home   mark 
+
+
+
+// CREATE USER WITH  PATH AND USERID
+sudo useradd  ravi  -m -d /var/www/ravi  -u 1831 

@@ -1,0 +1,64 @@
+create ns iron-namespace-datacenter
+
+
+
+#depolyment 1
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  iron-gallery-deployment-datacenter
+  labels:
+    run: iron-gallery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: iron-gallery
+  template:
+    metadata:
+      labels:
+        run: iron-gallery
+    spec:
+      containers:
+      - name: iron-gallery-container-datacenter
+        image: kodekloud/irongallery:2.0
+		resources:
+		  limits:
+			memory: "100Mi"
+			cpu: "50m"
+		volumeMounts:
+		- mountPath: /usr/share/nginx/html/data
+		  name: config
+		- mountPath: /usr/share/nginx/html/uploads
+		  name: images		  
+	  volumes:
+	  - name: config
+		emptyDir: {}
+	  - name: images
+		emptyDir: {}
+
+#depolyment 2
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  iron-db-deployment-datacenter
+  labels:
+    db: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: mariadb
+  template:
+    metadata:
+      labels:
+        db: mariadb
+    spec:
+      containers:
+      - name:  iron-db-container-datacenter
+        image: kodekloud/irondb:2.0
+		
+		
+		

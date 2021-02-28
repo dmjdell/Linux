@@ -1,0 +1,1 @@
+Chnaged image httpd:latests ==> httpd:latest

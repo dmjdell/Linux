@@ -1,0 +1,8 @@
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+
+
+docker  run -d  --name nginx_1  nginx:alpine
+
+docker run --name nginx_2 -d nginx:alpine

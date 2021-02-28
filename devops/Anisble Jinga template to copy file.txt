@@ -1,0 +1,43 @@
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+
+playbook.yml
+
+
+---
+- hosts: stapp03
+  become: yes
+  become_user: root
+  roles:
+    - role/httpd
+
+vi /home/thor/ansible/role/httpd/tasks/main.yml 
+
+
+# tasks file for role/test
+
+- name: install the latest version of HTTPD
+  yum:
+    name: httpd
+    state: latest
+
+- name: Start service httpd
+  service:
+    name: httpd
+    state: started
+- name: Copy file with owner and permissions
+  template:
+   src: /home/thor/ansible/role/httpd/templates/index.html.j2
+   dest: /var/www/html/index.html
+   owner: "{{hostvars[inventory_hostname].ansible_user}}"
+   seuser: "{{hostvars[inventory_hostname].ansible_user}}"
+   group: "{{hostvars[inventory_hostname].ansible_user}}"
+   mode: '0777'
+   
+   
+vi  /home/thor/ansible/role/httpd/templates/index.html.j2
+
+
+This file was created using Ansible on {% ansible_hostname % }}
+
+

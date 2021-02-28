@@ -1,0 +1,16 @@
+ssh tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+ssh steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+ssh banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+ssh peter@stdb01    172.16.239.10			Sp!dy	Nautilus DB Server
+
+
+
+scp -r /tmp/nautilus_banner tony@stapp01:/tmp
+scp -r /tmp/nautilus_banner steve@stapp02:/tmp
+scp -r /tmp/nautilus_banner banner@stapp03:/tmp
+scp -r /tmp/nautilus_banner peter@stdb01:/tmp
+
+  yum -y install openssh-clients
+
+cp /tmp/nautilus_banner /etc/motd

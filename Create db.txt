@@ -1,0 +1,33 @@
+```
+- scp /home/thor/db.sql peter@stdb01:/home/peter/ 
+- sudo yum install mariadb
+- mysql_secure_installation
+
+vi /etc/my.cnf
+# add follows within [mysqld] section
+[mysqld]
+character-set-server=utf8
+
+
+
+
+
+mysql -u root -p 
+CREATE DATABASE kodekloud_db2; 
+CREATE USER 'kodekloud_rin' IDENTIFIED BY 'password'; 
+GRANT ALL PRIVILEGES on kodekloud_db2.* to 'kodekloud_rin'@'localhost' identified by 'password'; 
+
+FLUSH PRIVILEGES;
+
+
+mysql -u kodekloud_rin -p kodekloud_db2 < /home/peter/db.sql
+
+#EDIT CONFIG
+
+sudo vi wp-config.php 
+
+Change the DBNAME, DBUSER, and DBPASSWORD variables as shown below: 
+
+define('DBNAME', 'kodeklouddb5'); define('DBUSER', 'kodekloudjoy'); define('DBPASSWORD', 'password'); define('DBHOST', 'stdb01'); 
+```
+Save and close the file when you are finished

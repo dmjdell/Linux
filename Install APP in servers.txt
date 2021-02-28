@@ -1,0 +1,31 @@
+tony@stapp01 	Ir0nM@n	Nautilus App 1
+steve@stapp02 		Am3ric@	Nautilus App 2
+banner@stapp03  		BigGr33n	Nautilus App 3
+
+
+loki@stlb01    172.16.238.14			 Mischi3f
+
+
+
+
+yum install openssh-clients
+natasha@ststor01   172.16.238.15			Bl@kW
+
+
+scp -r /home/thor/official  natasha@ststor01:/data
+scp -r  /home/thor/games natasha@ststor01:/data
+
+
+ yum install httpd
+ 
+ vi /etc/httpd/conf/httpd.conf
+ 
+ 
+ 
+ 
+ systemctl start httpd
+ systemctl enable httpd
+ systemctl restart httpd
+ 
+ curl  http://localhost:8080/beta/index.html
+ curl  http://localhost:8080/demo/index.html

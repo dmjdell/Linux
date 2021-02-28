@@ -1,0 +1,18 @@
+FROM kkloud 
+
+
+docker exec -it kkloud bash
+
+apt install apache2
+
+cd /etc/apache2
+
+apt install vim
+
+edit  ports.confg to ports
+
+apt install systemctl 
+
+systemctl start  apache2
+systemctl status apache2 
+

@@ -1,0 +1,22 @@
+Create a job ==> paste name ==> select freestyle project ==> ok
+
+select JOB ==> under general ==> click  "this project is parameterized"
+
+select string parameter from dropdown and give name and value 
+
+
+select add parameter  and choose  "choice parameter"
+
+
+
+Stage  ==> add all the values line by line {}
+
+
+then choose execute shell
+
+copy
+
+echo "${Stage}"
+echo "${env}"
+
+https://www.baeldung.com/ops/jenkins-parameterized-builds

@@ -1,0 +1,43 @@
+ssh peter@stdb01    172.16.239.10			Sp!dy	Nautilus DB Server
+
+
+INSTALL POSTGRES
+
+sudo yum install postgresql-server postgresql-contrib
+sudo postgresql-setup initdb
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+
+CREATE USER AND PASS
+
+sudo passwd postgres
+su - postgres              
+
+
+psql postgres
+
+
+CREATE USER 
+
+
+
+postgres=# create database kodekloud_db9  ;
+postgres=# CREATE USER kodekloud_cap  with encrypted password 'LQfKeWWxWD';
+postgres=# grant all privileges on database kodekloud_db9   to kodekloud_cap ;
+
+
+vi /var/lib/pgsql/data/pg_hba.conf        //change peer to md5 
+
+
+TESTING 
+
+
+psql kodekloud_db9     
+
+psql kodekloud_db9      -U kodekloud_cap   
+
+psql -U kodekloud_cap  -d kodekloud_db9   -h 127.0.0.1 -W
+
+
+MAKE LOCAL SOCKER CONNECTION TO DATABASE USING USER WITH MD5 PASS ENCR
+

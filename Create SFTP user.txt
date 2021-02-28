@@ -1,0 +1,28 @@
+ssh connect to app server2:
+===============
+ssh -l banner stwebdata03
+
+sudo -i
+create ChrootDirectory:
+===============
+mkdir -p /var/www/webdata
+chmod 755  /var/www/webdata
+
+create user ravi :
+============
+groupadd sftp_users
+useradd -g sftp_users -d /upload -s /sbin/nologin   ravi 
+passwd BruCStnMT5 
+chown -R root:sftp_users    /var/www/webdata/ravi 
+chown -R ravi :sftp_users  /var/www/webdata/ravi /upload
+
+configure  sshd_config:
+===============
+
+vi /etc/ssh/sshd_config
+Match Group  sftp_users
+ChrootDirectory /var/www/webdata/%u
+ForceCommand internal-sftp
+save & exit
+
+systemctl restart  sshd

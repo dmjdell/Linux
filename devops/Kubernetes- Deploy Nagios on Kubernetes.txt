@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagios-deployment
+  labels:
+    app: nagios
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nagios
+  template:
+    metadata:
+      labels:
+        app: nagios
+    spec:
+      containers:
+      - name: nagios-container
+        image: jasonrivers/nagios
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagios-service
+spec:
+  type: NodePort
+  selector:
+    app: nagios
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30008
+
+kubectl scale --replicas=1 deploy/nagios-deployment 
+ 
+htpasswd -c /opt/nagios/etc/htpasswd.users xFusionCorp
+
+LQfKeWWxWD

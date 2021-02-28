@@ -1,0 +1,11 @@
+sudo useradd -u 1500 username
+
+useradd -m -d /var/www/kirsty kirsty -u 1420
+
+
+repoid is values inside [] in localyum.repo . you have used localrepo so convert the values to [localyum] .Then u do ==> yum repolist , it will show repoid and reponame as localyum
+repoid is values inside [] in epel_local.repo . you have used epel_yum so convert the values to [epel_local] .Then u do ==> yum repolist , it will show repoid and reponame as epel_local
+
+
+
+nodeport is set ti 31273  but question is asking to set to 30011. Tryagain

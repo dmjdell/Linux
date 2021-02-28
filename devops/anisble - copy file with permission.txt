@@ -1,0 +1,26 @@
+[all]
+stapp01 ansible_host=172.16.238.10    ansible_connection=ssh        ansible_user=tony ansible_ssh_pass=Ir0nM@n
+stapp02 ansible_host=172.16.238.11    ansible_connection=ssh        ansible_user=steve ansible_ssh_pass=Am3ric@
+stapp03 ansible_host=172.16.238.12    ansible_connection=ssh        ansible_user=banner ansible_ssh_pass=BigGr33n
+
+
+
+
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+  
+   - name: Copy file with owner and permissions
+     copy:
+        src: /usr/src/data.txt
+        dest: /usr/src/data.txt
+        owner: "{{hostvars[inventory_hostname].ansible_user}}"
+        group: "{{hostvars[inventory_hostname].ansible_user}}"
+        mode: '0644'
+		
+		
+		
+cd /usr/src/
+		
+ ansible-playbook -i inventory playbook.yml
