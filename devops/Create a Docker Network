@@ -1,0 +1,6 @@
+docker network create -d macvlan \
+  --subnet=192.168.30.0/24 \
+  --ip-range=192.168.30.3/24 \
+  news 
+	  
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
