@@ -1,0 +1,34 @@
+ /home/thor/ansible/playbook.yml 
+ 
+
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Copying to app01
+    copy:
+      src: /usr/src/security/blog.txt
+      dest: /opt/security/
+      owner: tony
+      group: tony
+      mode: '0655'
+    when: ansible_nodename == "stapp01.stratos.xfusioncorp.com"
+  - name: Copying to app02
+    copy:
+      src: /usr/src/security/story.txt
+      dest: /opt/security/
+      owner: steve
+      group: steve
+      mode: '0655'
+    when: ansible_nodename == "stapp02.stratos.xfusioncorp.com" 
+  - name: Copying to app03
+    copy:
+      src: /usr/src/security/media.txt
+      dest: /opt/security/
+      owner: banner
+      group: banner
+      mode: '0655'
+    when: ansible_nodename == "stapp03.stratos.xfusioncorp.com" 
+	  
+
+ ansible-playbook -i inventory playbook.yml
