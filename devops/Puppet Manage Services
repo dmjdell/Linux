@@ -1,0 +1,26 @@
+cd /etc/puppetlabs/code/environments/production/manifests
+
+
+vi news.pp
+
+
+
+node "stapp01.stratos.xfusioncorp.com","stapp02.stratos.xfusioncorp.com","stapp03.stratos.xfusioncorp.com"{
+        include nginxservice
+}
+class nginxservice {
+    package { 'nginx':
+        ensure => installed,
+    }
+    service { 'nginx':
+        ensure => running,
+        enable => true,
+    }
+	
+}
+
+puppet agent -tv
+
+ssh tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+ssh steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+ssh banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
