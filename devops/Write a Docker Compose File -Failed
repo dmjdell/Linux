@@ -1,0 +1,13 @@
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+
+/opt/docker/docker-compose.yml
+
+version: '2'
+services:
+  httpd :
+    image: httpd:latest
+    volumes:
+      -  /usr/local/apache2/htdocs:/opt/security
+    ports:
+      - "80:6000"
+    container_name: httpd 
