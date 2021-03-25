@@ -1,0 +1,29 @@
+/home/thor/ansible
+vi playbook.yml
+
+
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Copying to app01
+    archive:
+      path: /usr/src/finance
+      dest: /opt/finance/ecommerce.tar.gz
+      owner: tony
+      group: tony
+    when: ansible_nodename == "stapp01.stratos.xfusioncorp.com"
+  - name: Copying to app02
+    archive:
+      path: /usr/src/finance
+      dest: /opt/finance/ecommerce.tar.gz
+      owner: steve
+      group: steve
+    when: ansible_nodename == "stapp02.stratos.xfusioncorp.com" 
+  - name: Copying to app03
+    archive:
+      path: /usr/src/finance
+      dest: /opt/finance/ecommerce.tar.gz
+      owner: banner
+      group: banner
+    when: ansible_nodename == "stapp03.stratos.xfusioncorp.com" 
