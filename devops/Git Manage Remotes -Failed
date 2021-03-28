@@ -1,0 +1,18 @@
+natasha@ststor01   172.16.238.15			Bl@kW	
+
+
+
+
+git remote add dev_beta  /opt/xfusioncorp_beta.git
+
+
+git remote -v 
+
+
+
+ cp /tmp/index.html  .
+ 
+ git add .
+ 
+git dev_beta  master
+
