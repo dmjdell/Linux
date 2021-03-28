@@ -1,0 +1,9 @@
+natasha@ststor01   172.16.238.15			Bl@kW	
+
+
+
+git clone /opt/ecommerce.git kodekloudrepos 
+
+
+
+ git init   /opt/ecommerce.git
