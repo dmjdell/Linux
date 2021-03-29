@@ -2,11 +2,11 @@ natasha@ststor01   172.16.238.15			Bl@kW
 
 cd /usr/src/kodekloudrepos/news
 
-git remote add dev_news  /opt/xfusioncorp_news.git
+git remote add dev_games  /opt/xfusioncorp_news.git
 
 git push -f  dev_news master 
 
-git fetch   dev_news master 
+git fetch   dev_games master 
 
 
 git remote -v 
@@ -15,4 +15,4 @@ git remote -v
  
  git add .
  
-git dev_beta  master
+git push -u dev_games master
