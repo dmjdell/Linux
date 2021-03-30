@@ -1,0 +1,56 @@
+vi /home/thor/playbook/inventory
+
+cat inventory 
+
+stapp01 ansible_host=172.16.238.10 ansible_ssh_pass=Ir0nM@n ansible_user=tony
+stapp02 ansible_host=172.16.238.11 ansible_ssh_pass=Am3ric@ ansible_user=steve
+stapp03 ansible_host=172.16.238.12 ansible_ssh_pass=BigGr33n ansible_user=banner
+
+cd ~/playbooks
+
+
+
+ansible-playbook -i inventory httpd.yml
+
+
+vi httpd.yml
+
+playbook.yaml 
+
+- hosts: stapp03
+  become: yes  
+  become_user: root
+  tasks:
+    - name: Install php  package
+      yum:
+        name: php 
+        state: installed
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: installed
+    - name: Create document root
+      file:
+        path: /var/www/html/myroot
+        state: directory
+    - name: Change document root path in httpd
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '/var/www/html/'
+        replace: '/var/www/html/myroot'
+    - name: Copy file with owner and permissions
+      template:
+       src: /home/thor/playbooks/templates/phpinfo.php.j2
+       dest: /var/www/html/myroot/phpinfo.php
+       owner: apache 
+       group: apache 
+    - name: Enable service httpd
+      service:
+       name: httpd
+       enabled: yes
+    - name: Start service httpd
+      service:
+       name: httpd
+       state: started
+
+curl 172.16.238.12:80
