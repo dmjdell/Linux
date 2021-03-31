@@ -36,8 +36,8 @@ playbook.yaml
     - name: Change document root path in httpd
       replace:
         path: /etc/httpd/conf/httpd.conf
-        regexp: '/var/www/html/'
-        replace: '/var/www/html/myroot'
+        regexp: DocumentRoot \"\/var\/www\/html\"
+        replace: DocumentRoot "/var/www/html/myroot"
     - name: Copy file with owner and permissions
       template:
        src: /home/thor/playbooks/templates/phpinfo.php.j2
