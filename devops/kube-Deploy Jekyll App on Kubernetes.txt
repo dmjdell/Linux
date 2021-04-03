@@ -1,63 +1,57 @@
-pvc:
-----
+kubectl create ns jekyll-namespace-datacenter 
+kubectl config set-context --current --namespace=jekyll-namespace-datacenter 
 
-
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jekyll-site-devops
-  namespace: jekyll-namespace-devops
+  name: jekyll-site-datacenter 
+  namespace: jekyll-namespace-datacenter 
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
-
-pod and  svc:
------------
-
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: jekyll-pod-devops
-  name: jekyll-pod-devops
-  namespace: jekyll-namespace-devops
+    app: jekyll-app
+  name: jekyll-pod-datacenter 
+  namespace: jekyll-namespace-datacenter 
 spec:
   volumes:
   - name: site
     persistentVolumeClaim:
-      claimName: jekyll-site-devops
+      claimName: jekyll-site-datacenter 
   initContainers:
   - image: kodekloud/jekyll
-    name: jekyll-init-devops
-    command: [ "/bin/bash", "-c", "bundle update; jekyll new /site" ]
+    name: jekyll-init-datacenter 
+    command: [ "jekyll", "new", "/site" ]
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: site
       mountPath: /site
   containers:
   - image: kodekloud/jekyll-serve
-    name: jekyll-container-devops
+    name: jekyll-container-datacenter 
     volumeMounts:
     - name: site
       mountPath: /site
-
 ---
 apiVersion: v1                                               
 kind: Service
 metadata:
   labels:
-    app: jekyll
-  name:  jekyll-service-devops
-  namespace: jekyll-namespace-devops
+    app: jekyll-app
+  name:  jekyll-service-datacenter 
+  namespace: jekyll-namespace-datacenter 
 spec:
+  selector:
+    app: jekyll-app
   ports:
-    port: 8080
+  - port: 8080
     protocol: TCP
     targetPort: 4000
     nodePort: 31181
