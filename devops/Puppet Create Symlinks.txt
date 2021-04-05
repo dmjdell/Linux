@@ -1,0 +1,35 @@
+vi /etc/puppetlabs/code/environments/production/manifests/blog.pp 
+
+/opt/puppetlabs/bin/puppet module install puppet-yum -i /etc/puppetlabs/code/modules/
+
+puppet module install puppet-yum
+
+
+node "stapp01.stratos.xfusioncorp.com","stapp02.stratos.xfusioncorp.com","stapp03.stratos.xfusioncorp.com" {
+        include symlinker 
+		include createfile
+}
+
+class symlinker {
+ file { '/opt/devops':
+    ensure => 'link',
+    target => '/var/www/html',
+  }
+  }
+class createfile
+{
+file { '/opt/devops/media.txt':
+  ensure => present,
+      content => 'Welcome to xFusionCorp Industries!',
+    mode   => '0644',
+
+}
+}
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
+
+puppet parser validate /etc/puppetlabs/code/environments/production/manifests/blog.pp 
+
+puppet agent -tv
