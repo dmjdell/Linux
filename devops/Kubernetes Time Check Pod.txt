@@ -1,0 +1,30 @@
+kubectl create ns devops 
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: time-check
+  namespace: devops
+spec:
+  containers:
+  - name: time-check
+    image: busybox:latest
+    command: [ "sh", "-c"]
+    args:
+     - 'while true; do date; sleep $TIME_FREQ;done;'
+    volumeMounts:
+    - name: foo
+      mountPath: "/opt/security/time"
+  volumes:
+  - name: foo
+    configMap:
+      name: time-config
+	  
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: time-config
+data:
+  TIME_FREQ=6
