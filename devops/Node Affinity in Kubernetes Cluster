@@ -1,0 +1,33 @@
+kubectl label nodes node01 color=grey
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grey
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      affinity:
+       nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+         nodeSelectorTerms:
+         - matchExpressions:
+           - key: color
+             operator: In
+             values:
+             - grey  
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
