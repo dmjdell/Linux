@@ -1,0 +1,53 @@
+puppet module install puppet-firewalld 
+
+
+
+cd /etc/puppetlabs/code/environments/production/manifests/data.pp
+
+puppet parser validate /etc/puppetlabs/code/environments/production/manifests/data.pp 
+
+node "stapp01.stratos.xfusioncorp.com" {
+        include firewall_node1  
+}
+
+node "stapp02.stratos.xfusioncorp.com"{
+        include firewall_node2
+}
+
+node "stapp03.stratos.xfusioncorp.com"{
+        include firewall_node3
+}
+
+class { 'firewalld': }
+
+class firewall_node1 {
+	 firewalld_port { 'Open port 8081  in the public zone':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8081,
+    protocol => 'tcp',
+  }
+}
+
+class firewall_node2 {
+	 firewalld_port { 'Open port 5009   in the public zone':
+    ensure   => present,
+    zone     => 'public',
+    port     => 5009 ,
+    protocol => 'tcp',
+  }
+}
+
+class firewall_node3 {
+	 firewalld_port { 'Open port 8092  in the public zone':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8092 ,
+    protocol => 'tcp',
+  }
+}
+puppet agent -tv
+
+tony@stapp01 172.16.238.10			Ir0nM@n	Nautilus App 1
+steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
+banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
