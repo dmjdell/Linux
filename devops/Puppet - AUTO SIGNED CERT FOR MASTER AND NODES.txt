@@ -16,41 +16,39 @@ steve@stapp02 172.16.238.11			Am3ric@	Nautilus App 2
 banner@stapp03  172.16.238.12		BigGr33n	Nautilus App 3
 
 
- find the config directory (as root)
+
+systemctl start puppetserver 
+systemctl status puppetserver 
+systemctl restart puppetserver 
+systemctl restart puppet
+
+
 $ puppet config print --section master confdir
 
 
-cd /etc/puppetlabs/puppet
+vi
+
+
+ON MASTER
+
+vi /etc/hosts
+
 
 # add a wildcard autosign
 $ cat /etc/puppet/autosign.conf
+
 jump_host.stratos.xfusioncorp.com
 stapp01.stratos.xfusioncorp.com
 stapp02.stratos.xfusioncorp.com
 stapp03.stratos.xfusioncorp.com
 
-
 systemctl restart puppet
 
+systemctl restart puppetserver
 
-On master add puppet 
-vi /etc/hosts 
+IN EACH APP SERVER 
 
-
-127.0.0.1       localhost
-::1     localhost ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-172.16.238.10   stapp01.stratos.xfusioncorp.com
-172.16.238.11   stapp02.stratos.xfusioncorp.com
-172.16.238.12   stapp03.stratos.xfusioncorp.com
-172.16.239.2    jump_host.stratos.xfusioncorp.com puppet
-172.16.238.3    jump_host.stratos.xfusioncorp.com puppet
-
-
-on apps  add puppet 
+vi /etc/hosts
 
 ::1     localhost ip6-localhost ip6-loopback
 fe00::0 ip6-localnet
@@ -61,11 +59,20 @@ ff02::2 ip6-allrouters
 172.16.239.4    stapp01.stratos.xfusioncorp.com stapp01
 172.16.238.10   stapp01.stratos.xfusioncorp.com stapp01
 
+ 
+
+IN MASTER SIGN ALL THE CERTS FROM APPS
+
+ cd /etc/puppetlabs/puppet/ssl/ca/requests
+ 
+ 
+ puppetserver ca  sign --all
+
+IN APPS SERVER
 
 puppet agent -t 
-
-
-To check 
+ 
+To check in MASTER FOR ALL THE SIGNED CERT 
 
 cd /etc/puppetlabs/puppet/ssl/ca/signed 
 
