@@ -1,0 +1,7 @@
+docker pull ubuntu:latest
+
+
+  
+docker run -d -it  --name beta   --mount type=bind,source=/opt/finance,target=/home  ubuntu:latest 
+
+docker cp /tmp/sample.txt beta:/home/ 
