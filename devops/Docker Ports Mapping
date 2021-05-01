@@ -1,1 +1,1 @@
- docker run -d -it  --name demo  -p 80:3004 nginx:alpine
+ docker run -d -it  --name demo  -p 3004:80 nginx:alpine
