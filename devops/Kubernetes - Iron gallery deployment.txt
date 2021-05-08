@@ -59,6 +59,3 @@ spec:
       containers:
       - name:  iron-db-container-datacenter
         image: kodekloud/irondb:2.0
-		
-		
-		
